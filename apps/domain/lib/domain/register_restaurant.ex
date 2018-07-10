@@ -5,7 +5,8 @@ defmodule LunchRoulette.Business.RegisterRestaurant do
     error
   end
 
-  def register(restaurant, _persistance, _presenter) do
+  def register(restaurant, persistance, _presenter) do
+    persistance.(restaurant)
     {:ok, restaurant}
   end
 end

@@ -78,4 +78,11 @@ defmodule LunchRoulette.Business.RegisterUnregisteredRestaurantTest do
     presenter = fn _ -> :ok end
     assert {:ok, "The other unregistered restaurant"} == RegisterRestaurant.register("The other unregistered restaurant", persistance, presenter)
   end
+
+  test "persists an unregistered restaurant" do
+    persistance = fn restaurant -> send(self(), {:ok, restaurant}) end
+    presenter = fn _ -> :ok end
+    RegisterRestaurant.register("The unregistered restaurant", persistance, presenter)
+    assert_received({:ok, "The unregistered restaurant"})
+  end
 end
