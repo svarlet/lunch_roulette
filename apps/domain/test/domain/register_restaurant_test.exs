@@ -60,3 +60,16 @@ defmodule LunchRoulette.Business.RegisterRestaurantWithEmptyNameTest do
     assert_received({:error, {:invalid_restaurant_name, ""}})
   end
 end
+
+
+defmodule LunchRoulette.Business.RegisterUnregisteredRestaurantTest do
+  use ExUnit.Case, async: true
+
+  alias LunchRoulette.Business.RegisterRestaurant
+
+  test "succeeds" do
+    persistance = fn _ -> :ok end
+    presenter = fn _ -> :ok end
+    assert {:ok, "The registered restaurant"} == RegisterRestaurant.register("The registered restaurant", persistance, presenter)
+  end
+end
