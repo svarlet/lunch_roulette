@@ -1,19 +1,32 @@
-defmodule LunchRoulette.Business.RegisterRestaurantTest do
+# TODO: restaurant not registered
+# TODO: restaurant already registered
+# TODO: restaurant is nil
+# TODO: restaurant is ""
+
+defmodule LunchRoulette.Business.RegisterRestaurantWithNilNameTest do
   use ExUnit.Case, async: true
 
   alias LunchRoulette.Business.RegisterRestaurant
 
-  # TODO: restaurant not registered
-  # TODO: restaurant already registered
-  # TODO: restaurant is nil
-  # TODO: restaurant is ""
-
-  test "restaurant is nil" do
-    assert {:error, {:invalid_restaurant_name, nil}} == RegisterRestaurant.register(nil)
+  test "returns an error" do
+    persistance = fn _ -> :ok end
+    assert {:error, {:invalid_restaurant_name, nil}} == RegisterRestaurant.register(nil, persistance)
   end
 
-  test "restaurant name is the empty string" do
-    assert {:error, {:invalid_restaurant_name, ""}} == RegisterRestaurant.register("")
+  test "does not attempt to save the restaurant" do
+    persistance = fn _ -> send(self(), :attempted_save) end
+    RegisterRestaurant.register(nil, persistance)
+    refute_received(:attempted_save)
   end
-
 end
+
+
+# defmodule LunchRoulette.Business.RegisterRestaurantWithEmptyNameTest do
+#   use ExUnit.Case, async: true
+
+#   alias LunchRoulette.Business.RegisterRestaurant
+
+#   test "returns an error" do
+#     assert {:error, {:invalid_restaurant_name, ""}} == RegisterRestaurant.register("")
+#   end
+# end
