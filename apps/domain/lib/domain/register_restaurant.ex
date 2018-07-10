@@ -1,5 +1,5 @@
 defmodule LunchRoulette.Business.RegisterRestaurant do
-  def register(_) do
-    {:error, {:invalid_restaurant_name, nil}}
+  def register(restaurant) do
+    {:error, {:invalid_restaurant_name, restaurant}}
   end
 end

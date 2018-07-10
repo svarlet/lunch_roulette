@@ -12,4 +12,8 @@ defmodule LunchRoulette.Business.RegisterRestaurantTest do
     assert {:error, {:invalid_restaurant_name, nil}} == RegisterRestaurant.register(nil)
   end
 
+  test "restaurant name is the empty string" do
+    assert {:error, {:invalid_restaurant_name, ""}} == RegisterRestaurant.register("")
+  end
+
 end
