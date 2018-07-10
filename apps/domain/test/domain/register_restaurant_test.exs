@@ -11,7 +11,9 @@ defmodule LunchRoulette.Business.RegisterRestaurantWithNilNameTest do
   test "returns an error" do
     persistance = fn _ -> :ok end
     presenter = fn _ -> :ok end
-    assert {:error, {:invalid_restaurant_name, nil}} == RegisterRestaurant.register(nil, persistance, presenter)
+
+    assert {:error, {:invalid_restaurant_name, nil}} ==
+             RegisterRestaurant.register(nil, persistance, presenter)
   end
 
   test "does not attempt to save the restaurant" do
@@ -29,7 +31,6 @@ defmodule LunchRoulette.Business.RegisterRestaurantWithNilNameTest do
   end
 end
 
-
 defmodule LunchRoulette.Business.RegisterRestaurantWithEmptyNameTest do
   use ExUnit.Case, async: true
 
@@ -38,6 +39,8 @@ defmodule LunchRoulette.Business.RegisterRestaurantWithEmptyNameTest do
   test "returns an error" do
     persistance = fn _ -> :ok end
     presenter = fn _ -> :ok end
-    assert {:error, {:invalid_restaurant_name, ""}} == RegisterRestaurant.register("", persistance, presenter)
+
+    assert {:error, {:invalid_restaurant_name, ""}} ==
+             RegisterRestaurant.register("", persistance, presenter)
   end
 end
