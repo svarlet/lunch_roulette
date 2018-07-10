@@ -2,6 +2,8 @@
 # TODO: restaurant already registered
 # TODO: restaurant is nil
 # TODO: restaurant is ""
+# TODO: persistance failed
+# TODO: reporting failed
 
 defmodule LunchRoulette.Business.RegisterRestaurantWithNilNameTest do
   use ExUnit.Case, async: true
@@ -79,7 +81,7 @@ defmodule LunchRoulette.Business.RegisterUnregisteredRestaurantTest do
     assert {:ok, "The other unregistered restaurant"} == RegisterRestaurant.register("The other unregistered restaurant", persistance, presenter)
   end
 
-  test "persists an unregistered restaurant" do
+  test "persists the restaurant" do
     persistance = fn restaurant -> send(self(), {:ok, restaurant}) end
     presenter = fn _ -> :ok end
     RegisterRestaurant.register("The unregistered restaurant", persistance, presenter)
