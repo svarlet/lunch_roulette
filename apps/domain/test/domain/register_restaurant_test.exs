@@ -3,17 +3,9 @@ defmodule LunchRoulette.Business.RegisterRestaurantTest do
 
   alias LunchRoulette.Business.RegisterRestaurant
 
-  test "restaurant exists" do
-    store = fn restaurant -> send self(), restaurant end
-    RegisterRestaurant.register_restaurant("already_registered", store)
-    refute_received "already registered restaurant"
-  end
-
-  test "restaurant does not exist"
-
-  test "nil"
-
-  test "empty name"
-
+  # TODO: restaurant not registered
+  # TODO: restaurant already registered
+  # TODO: restaurant is nil
+  # TODO: restaurant is ""
 
 end
