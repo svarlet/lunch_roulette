@@ -1,7 +1,7 @@
-# TODO: restaurant not registered
+# DONE: restaurant not registered
 # TODO: restaurant already registered
-# TODO: restaurant is nil
-# TODO: restaurant is ""
+# DONE: restaurant is nil
+# DONE: restaurant is ""
 # TODO: persistance failed
 # TODO: reporting failed
 
@@ -10,21 +10,13 @@ defmodule LunchRoulette.Business.RegisterRestaurantTest do
 
   import LunchRoulette.Business.RegisterRestaurant, only: [register: 3]
 
-  def dummy_persistance(_) do
-    :ok
-  end
+  def dummy_persistance(_), do: :ok
 
-  def persistance_spy(restaurant) do
-    send(self(), restaurant)
-  end
+  def persistance_spy(restaurant), do: send(self(), restaurant)
 
-  def dummy_presenter(_) do
-    :ok
-  end
+  def dummy_presenter(_), do: :ok
 
-  def presenter_spy(report) do
-    send(self(), report)
-  end
+  def presenter_spy(report), do: send(self(), report)
 
   describe "register a restaurant with a nil name" do
     test "returns an error" do
