@@ -5,93 +5,85 @@
 # TODO: persistance failed
 # TODO: reporting failed
 
-defmodule LunchRoulette.Business.RegisterRestaurantWithNilNameTest do
+defmodule LunchRoulette.Business.RegisterRestaurantTest do
   use ExUnit.Case, async: true
 
-  alias LunchRoulette.Business.RegisterRestaurant
+  import LunchRoulette.Business.RegisterRestaurant, only: [register: 3]
 
-  test "returns an error" do
-    persistance = fn _ -> :ok end
-    presenter = fn _ -> :ok end
-
-    assert {:error, {:invalid_restaurant_name, nil}} ==
-             RegisterRestaurant.register(nil, persistance, presenter)
+  def dummy_persistance(_) do
+    :ok
   end
 
-  test "does not attempt to save the restaurant" do
-    persistance = fn _ -> send(self(), :attempted_save) end
-    presenter = fn _ -> :ok end
-    RegisterRestaurant.register(nil, persistance, presenter)
-    refute_received(:attempted_save)
+  def persistance_spy(restaurant) do
+    send(self(), restaurant)
   end
 
-  test "reports the error" do
-    persistance = fn _ -> :ok end
-    presenter = fn error -> send(self(), error) end
-    RegisterRestaurant.register(nil, persistance, presenter)
-    assert_received({:error, {:invalid_restaurant_name, nil}})
-  end
-end
-
-defmodule LunchRoulette.Business.RegisterRestaurantWithEmptyNameTest do
-  use ExUnit.Case, async: true
-
-  alias LunchRoulette.Business.RegisterRestaurant
-
-  test "returns an error" do
-    persistance = fn _ -> :ok end
-    presenter = fn _ -> :ok end
-
-    assert {:error, {:invalid_restaurant_name, ""}} ==
-             RegisterRestaurant.register("", persistance, presenter)
+  def dummy_presenter(_) do
+    :ok
   end
 
-  test "does not attempt to save the restaurant" do
-    persistance = fn _ -> send(self(), :attempted_save) end
-    presenter = fn _ -> :ok end
-
-    RegisterRestaurant.register("", persistance, presenter)
-
-    refute_received(:attempted_save)
+  def presenter_spy(report) do
+    send(self(), report)
   end
 
-  test "reports the error via the presenter" do
-    persistance = fn _ -> :ok end
-    presenter = fn error -> send(self(), error) end
-    RegisterRestaurant.register("", persistance, presenter)
-    assert_received({:error, {:invalid_restaurant_name, ""}})
-  end
-end
+  describe "register a restaurant with a nil name" do
+    test "returns an error" do
+      assert {:error, {:invalid_restaurant_name, nil}} ==
+               register(nil, &dummy_persistance/1, &dummy_presenter/1)
+    end
 
+    test "does not attempt to save the restaurant" do
+      register(nil, &persistance_spy/1, &dummy_presenter/1)
+      refute_received(nil)
+    end
 
-defmodule LunchRoulette.Business.RegisterUnregisteredRestaurantTest do
-  use ExUnit.Case, async: true
-
-  alias LunchRoulette.Business.RegisterRestaurant
-
-  test "succeeds" do
-    persistance = fn _ -> :ok end
-    presenter = fn _ -> :ok end
-    assert {:ok, "The unregistered restaurant"} == RegisterRestaurant.register("The unregistered restaurant", persistance, presenter)
+    test "reports the error" do
+      register(nil, &dummy_persistance/1, &presenter_spy/1)
+      assert_received({:error, {:invalid_restaurant_name, nil}})
+    end
   end
 
-  test "succeeds with another unregistered restaurant" do
-    persistance = fn _ -> :ok end
-    presenter = fn _ -> :ok end
-    assert {:ok, "The other unregistered restaurant"} == RegisterRestaurant.register("The other unregistered restaurant", persistance, presenter)
+  describe "register a restaurant with an empty name" do
+    test "returns an error" do
+      assert {:error, {:invalid_restaurant_name, ""}} ==
+               register("", &dummy_persistance/1, &dummy_presenter/1)
+    end
+
+    test "does not attempt to save the restaurant" do
+      register("", &persistance_spy/1, &dummy_presenter/1)
+
+      refute_received("")
+    end
+
+    test "reports the error via the presenter" do
+      register("", &dummy_persistance/1, &presenter_spy/1)
+      assert_received({:error, {:invalid_restaurant_name, ""}})
+    end
   end
 
-  test "persists the restaurant" do
-    persistance = fn restaurant -> send(self(), {:saved, restaurant}) end
-    presenter = fn _ -> :ok end
-    RegisterRestaurant.register("The unregistered restaurant", persistance, presenter)
-    assert_received({:saved, "The unregistered restaurant"})
-  end
+  describe "register an unregistered restaurant" do
+    test "succeeds" do
+      assert {:ok, "The unregistered restaurant"} ==
+               register("The unregistered restaurant", &dummy_persistance/1, &dummy_presenter/1)
+    end
 
-  test "reports the restaurant registration" do
-    persistance = fn _ -> :ok end
-    presenter = fn restaurant -> send(self(), {:reported, restaurant}) end
-    RegisterRestaurant.register("The unregistered restaurant", persistance, presenter)
-    assert_received({:reported, "The unregistered restaurant"})
+    test "succeeds with another unregistered restaurant" do
+      assert {:ok, "The other unregistered restaurant"} ==
+               register(
+                 "The other unregistered restaurant",
+                 &dummy_persistance/1,
+                 &dummy_presenter/1
+               )
+    end
+
+    test "persists the restaurant" do
+      register("The unregistered restaurant", &persistance_spy/1, &dummy_presenter/1)
+      assert_received("The unregistered restaurant")
+    end
+
+    test "reports the restaurant registration" do
+      register("The unregistered restaurant", &dummy_persistance/1, &presenter_spy/1)
+      assert_received("The unregistered restaurant")
+    end
   end
 end
