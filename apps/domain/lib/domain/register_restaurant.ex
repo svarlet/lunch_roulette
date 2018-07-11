@@ -6,8 +6,12 @@ defmodule LunchRoulette.Business.RegisterRestaurant do
   end
 
   def register(restaurant, persistance, presenter) do
-    persistance.(restaurant)
-    presenter.(restaurant)
-    {:ok, restaurant}
+    case persistance.(restaurant) do
+      {:error, :already_registered} ->
+        {:error, {:already_registered, restaurant}}
+      _ ->
+        presenter.(restaurant)
+        {:ok, restaurant}
+    end
   end
 end

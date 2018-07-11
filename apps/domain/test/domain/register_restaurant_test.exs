@@ -78,4 +78,31 @@ defmodule LunchRoulette.Business.RegisterRestaurantTest do
       assert_received("The unregistered restaurant")
     end
   end
+
+  describe "restaurant already registered" do
+    test "returns an error" do
+      persistance = fn _restaurant -> {:error, :already_registered} end
+
+      assert {:error, {:already_registered, "The already registered restaurant"}} =
+               register("The already registered restaurant", persistance, &dummy_presenter/1)
+    end
+
+    test "attempts to persist the restaurant" do
+      persistance = fn restaurant ->
+        send(self(), restaurant)
+        {:error, :already_registered}
+      end
+      register("The already registered restaurant", persistance, &dummy_presenter/1)
+      assert_received("The already registered restaurant")
+    end
+
+    test "reports the failed restaurant registration" do
+      persistance = fn restaurant ->
+        send(self(), restaurant)
+        {:error, :already_registered}
+      end
+      register("The already registered restaurant", persistance, &presenter_spy/1)
+      assert_received("The already registered restaurant")
+    end
+  end
 end
