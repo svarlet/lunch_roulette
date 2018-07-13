@@ -7,3 +7,5 @@
 *** TODO invalid submission
 *** TODO database down
 ** Refactoring suggestions [0/0]
+*** Create a restuarnat data structure
+*** Create a submission data structure
