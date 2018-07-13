@@ -1,1 +1,8 @@
-* TODO
+* Submit restaurant
+** Tests to write [0/5]
+*** TODO unregistered restaurant
+*** TODO registered restaurant
+*** TODO invalid restaurant
+*** TODO nil restaurant
+*** TODO database down
+** Refactoring suggestions [0/0]
