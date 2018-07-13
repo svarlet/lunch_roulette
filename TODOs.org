@@ -1,8 +1,9 @@
+#+TODO: TODO DOING | DONE WONT_FIX
+
 * Submit restaurant
-** Tests to write [0/5]
-*** TODO unregistered restaurant
-*** TODO registered restaurant
-*** TODO invalid restaurant
-*** TODO nil restaurant
+** Tests to write [0/4]
+*** TODO valid submission, unregistered restaurant
+*** TODO valid submission, registered restaurant
+*** TODO invalid submission
 *** TODO database down
 ** Refactoring suggestions [0/0]
