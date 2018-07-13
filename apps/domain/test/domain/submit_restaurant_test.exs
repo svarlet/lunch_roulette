@@ -14,7 +14,6 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
   end
 
   describe "given a valid and registered restaurant" do
-    @tag :skip
     test "should not persist the restaurant a second time" do
       assert ["Pizza Express"] == SubmitRestaurant.process("Pizza Express", ["Pizza Express"])
     end
