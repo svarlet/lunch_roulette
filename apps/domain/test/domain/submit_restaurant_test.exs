@@ -9,6 +9,11 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
       assert MapSet.member?(data_store, "Pizza Express")
     end
 
+    test "should persist another restaurant to the data store" do
+      data_store = SubmitRestaurant.process("Wagamama", MapSet.new())
+      assert MapSet.member?(data_store, "Wagamama")
+    end
+
   end
 
 end
