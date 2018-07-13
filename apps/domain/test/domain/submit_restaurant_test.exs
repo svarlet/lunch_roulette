@@ -5,15 +5,19 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
 
   describe "given a valid and unregistered restaurant" do
     test "should persist the restaurant to the data store" do
-      data_store = SubmitRestaurant.process("Pizza Express", MapSet.new())
-      assert MapSet.member?(data_store, "Pizza Express")
+      assert ["Pizza Express"] == SubmitRestaurant.process("Pizza Express", [])
     end
 
     test "should persist another restaurant to the data store" do
-      data_store = SubmitRestaurant.process("Wagamama", MapSet.new())
-      assert MapSet.member?(data_store, "Wagamama")
+      assert ["Wagamama"] == SubmitRestaurant.process("Wagamama", [])
     end
+  end
 
+  describe "given a valid and registered restaurant" do
+    @tag :skip
+    test "should not persist the restaurant a second time" do
+      assert ["Pizza Express"] == SubmitRestaurant.process("Pizza Express", ["Pizza Express"])
+    end
   end
 
 end
