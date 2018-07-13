@@ -5,7 +5,7 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
 
   describe "given a valid and unregistered restaurant" do
     test "should persist the restaurant to the data store" do
-      data_store = SubmitRestaurant.process("Pizza Express", %MapSet{})
+      data_store = SubmitRestaurant.process("Pizza Express", MapSet.new())
       assert MapSet.member?(data_store, "Pizza Express")
     end
 
