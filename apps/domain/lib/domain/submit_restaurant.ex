@@ -1,4 +1,8 @@
 defmodule LunchRoulette.Business.SubmitRestaurant do
+  def process(nil, data_store) do
+    data_store
+  end
+
   def process(restaurant, data_store) do
     if registered?(data_store, restaurant) do
       data_store

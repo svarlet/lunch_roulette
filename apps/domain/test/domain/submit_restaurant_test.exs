@@ -19,4 +19,10 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
     end
   end
 
+  describe "given an invalid submission" do
+    test "should not persist the restaurant" do
+      assert [] == SubmitRestaurant.process(nil, [])
+    end
+  end
+
 end
