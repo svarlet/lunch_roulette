@@ -1,17 +1,13 @@
 defmodule LunchRoulette.Business.SubmitRestaurant do
-  def process(nil, data_store) do
-    data_store
-  end
-
-  def process("", data_store) do
-    data_store
-  end
-
   def process(restaurant, data_store) do
-    if registered?(data_store, restaurant) do
-      data_store
+    if valid?(restaurant) do
+      if registered?(data_store, restaurant) do
+        data_store
+      else
+        store(restaurant, data_store)
+      end
     else
-      store(restaurant, data_store)
+      data_store
     end
   end
 
@@ -21,5 +17,13 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
 
   defp store(restaurant, data_store) do
     [restaurant | data_store]
+  end
+
+  defp valid?(restaurant) do
+    case restaurant do
+      nil -> false
+      "" -> false
+      _ -> true
+    end
   end
 end
