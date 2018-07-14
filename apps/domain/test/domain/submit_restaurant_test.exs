@@ -25,5 +25,4 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
       assert [] == SubmitRestaurant.process("", [])
     end
   end
-
 end
