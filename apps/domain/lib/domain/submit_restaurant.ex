@@ -3,11 +3,15 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
     if registered?(data_store, restaurant) do
       data_store
     else
-      [restaurant | data_store]
+      store(restaurant, data_store)
     end
   end
 
   defp registered?(data_store, restaurant) do
     Enum.member?(data_store, restaurant)
+  end
+
+  defp store(restaurant, data_store) do
+    [restaurant | data_store]
   end
 end
