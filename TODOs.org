@@ -1,12 +1,13 @@
 #+TODO: TODO DOING | DONE WONT_FIX
 
 * Submit restaurant
-** Tests to write [2/4]
+** Tests to write [3/4]
 *** DONE valid submission, unregistered restaurant
     CLOSED: [2018-07-13 Fri 19:00]
 *** DONE valid submission, registered restaurant
     CLOSED: [2018-07-13 Fri 19:00]
-*** TODO invalid submission
+*** DONE invalid submission
+    CLOSED: [2018-07-14 Sat 09:54]
 *** TODO database down
 ** Refactoring suggestions [0/0]
 *** Create a restuarnat data structure
