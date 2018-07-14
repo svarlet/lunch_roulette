@@ -4,7 +4,7 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
       if registered?(data_store, restaurant) do
         data_store
       else
-        store(restaurant, data_store)
+        Storage.store(data_store, restaurant)
       end
     else
       data_store
@@ -15,15 +15,21 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
     Enum.member?(data_store, restaurant)
   end
 
-  defp store(restaurant, data_store) do
-    [restaurant | data_store]
-  end
-
   defp valid?(restaurant) do
     case restaurant do
       nil -> false
       "" -> false
       _ -> true
     end
+  end
+end
+
+defprotocol Storage do
+  def store(data_storage, data_store)
+end
+
+defimpl Storage, for: List do
+  def store(data_store, restaurant) do
+    [restaurant | data_store]
   end
 end
