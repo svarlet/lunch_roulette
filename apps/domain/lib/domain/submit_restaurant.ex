@@ -1,11 +1,7 @@
 defmodule LunchRoulette.Business.SubmitRestaurant do
   def process(restaurant, data_store) do
     if valid?(restaurant) do
-      if Storage.registered?(data_store, restaurant) do
-        data_store
-      else
-        Storage.store(data_store, restaurant)
-      end
+      Storage.store(data_store, restaurant)
     else
       data_store
     end
@@ -22,16 +18,18 @@ end
 
 defprotocol Storage do
   def store(data_store, data_store)
-
-  def registered?(data_store, restaurant)
 end
 
 defimpl Storage, for: List do
   def store(data_store, restaurant) do
-    [restaurant | data_store]
+    if registered?(data_store, restaurant) do
+      data_store
+    else
+      [restaurant | data_store]
+    end
   end
 
-  def registered?(data_store, restaurant) do
+  defp registered?(data_store, restaurant) do
     Enum.member?(data_store, restaurant)
   end
 end
