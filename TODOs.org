@@ -9,6 +9,8 @@
 *** DONE invalid submission
     CLOSED: [2018-07-14 Sat 09:54]
 *** TODO database down
-** Refactoring suggestions [0/0]
-*** Create a restuarnat data structure
-*** Create a submission data structure
+** Refactoring suggestions [0/2]
+*** TODO Create a restuarnat data structure
+*** TODO Create a submission data structure
+** Critics [0/1]
+*** TODO It seems to be a bad idea to force process/2 to return a list of all restaurants. It is unnecessary and would not scale well. It would useful to return the success/failure of this operation and perhaps the data_store if it has changed from the provided one.
