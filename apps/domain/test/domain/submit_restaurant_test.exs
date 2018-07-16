@@ -1,10 +1,15 @@
 defmodule LunchRoulette.Business.SubmitRestaurantTest do
   use ExUnit.Case, async: true
 
-  alias LunchRoulette.Business.SubmitRestaurant
+  alias LunchRoulette.Business.{Restaurant, SubmitRestaurant}
+  alias LunchRoulette.Storage
 
   describe "given a valid and unregistered restaurant" do
     test "should persist the restaurant to the data store" do
+      store = []
+      restaurant = %Restaurant{name: "Pizza Express"}
+      SubmitRestaurant.submit(restaurant, store)
+      assert Storage.registered?(store, "Pizza Express")
     end
 
     # test "should persist another restaurant to the data store" do
