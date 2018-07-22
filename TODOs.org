@@ -13,10 +13,11 @@
 *** DONE restaurant off shortlist
     CLOSED: [2018-07-22 Sun 18:58]
 
-** Validator [1/4]
+** Validator [2/4]
 *** DONE nil restaurant -> {:error, :nil_submission}
     CLOSED: [2018-07-22 Sun 23:07]
-*** TODO with empty name -> {:error, :empty_restaurant_name}
+*** DONE with empty name -> {:error, :empty_restaurant_name}
+    CLOSED: [2018-07-22 Sun 23:18]
 *** TODO with nil name -> {:error, :nil_restaurant_name}
 *** TODO anything else -> {:ok, restaurant}
 ** Shortlist [0/2]
