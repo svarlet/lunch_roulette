@@ -2,13 +2,8 @@
 
 * Submit restaurant
 ** Tests to write [0/4]
-*** TODO valid submission, unregistered restaurant
-*** TODO valid submission, registered restaurant
-*** TODO invalid submission
-*** TODO database down
-** Refactoring suggestions [1/2]
-*** DONE Create a restuarnat data structure
-    CLOSED: [2018-07-16 Mon 15:56]
-*** TODO Create a submission data structure
-** Critics [0/1]
-*** DOING It seems to be a bad idea to force process/2 to return a list of all restaurants. It is unnecessary and would not scale well. It would useful to return the success/failure of this operation and perhaps the data_store if it has changed from the provided one.
+*** nil submission
+*** restaurant name is nil
+*** restaurnat name is empty
+*** restaurant already shortlisted
+*** restaurant off shortlist
