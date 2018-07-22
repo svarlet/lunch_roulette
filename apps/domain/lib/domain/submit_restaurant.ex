@@ -3,25 +3,21 @@ defmodule LunchRoulette.Business.Restaurant do
   defstruct [:name]
 end
 
-defmodule LunchRoulette.Business.SubmitRestaurant.Validator do
-  alias LunchRoulette.Business.Restaurant
-
-  @callback validate(Restaurant.t) :: {:ok, Restaurant.t}
-end
-
-defmodule LunchRoulette.Business.SubmitRestaurant.Shortlist do
-  alias LunchRoulette.Business.Restaurant
-
-  @callback shortlist(Restaurant.t) :: {:ok, Restaurant.t}
-end
-
-defmodule LunchRoulette.Business.SubmitRestaurant.Feedback do
-  alias LunchRoulette.Business.Restaurant
-
-  @callback report_success(Restaurant.t) :: no_return
-end
-
 defmodule LunchRoulette.Business.SubmitRestaurant do
+  alias LunchRoulette.Business.Restaurant
+
+  defmodule Validator do
+    @callback validate(Restaurant.t) :: {:ok, Restaurant.t}
+  end
+
+  defmodule Shortlist do
+    @callback shortlist(Restaurant.t) :: {:ok, Restaurant.t}
+  end
+
+  defmodule Feedback do
+    @callback report_success(Restaurant.t) :: no_return
+  end
+
   def submit(restaurant, validator_mod, shortlist_mod, feedback_mod) do
     with {:ok, ^restaurant} <- validator_mod.validate(restaurant),
          {:ok, ^restaurant} <- shortlist_mod.shortlist(restaurant) do
