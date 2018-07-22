@@ -17,4 +17,9 @@ defmodule LunchRoulette.Business.SubmitRestaurant.ValidatorTest do
     restaurant = %Restaurant{name: nil}
     assert {:error, :nil_restaurant_name} == SubmissionValidator.validate(restaurant)
   end
+
+  test "valid restaurant" do
+    restaurant = %Restaurant{name: Faker.Company.name()}
+    assert {:ok, restaurant} == SubmissionValidator.validate(restaurant)
+  end
 end
