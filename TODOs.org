@@ -23,6 +23,10 @@
 *** DONE anything else -> {:ok, restaurant}
     CLOSED: [2018-07-22 Sun 23:29]
 ** Shortlist [0/2]
+*** Decide between:
+**** a shortlist behaviour and a unique process named after the module so we don't need to pass a pid but we lose async testing
+**** a shortlist behaviour and we require an extra pid param
+**** a shortlist protocol, this allow to hide specific detail of the implementation (ets? ecto? agent?) but Mox won't help to mock dependencies
 *** TODO shortlisted -> {:error, :already_shortlisted}
 *** TODO not listed -> {:ok, restaurant}
 ** Feedback [0/4]
