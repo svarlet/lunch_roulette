@@ -27,6 +27,7 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
     expect(Validator.Mock, :validate, fn ^restaurant -> {:ok, restaurant} end)
     expect(Shortlist.Mock, :shortlist, fn ^restaurant -> {:ok, restaurant} end)
     expect(Feedback.Mock, :report_success, fn ^restaurant -> :ok end)
+
     SubmitRestaurant.submit(restaurant, config)
   end
 end
