@@ -43,7 +43,7 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
 
   test "nil submission" do
     expect(Validator.Mock, :validate, fn nil -> {:error, :nil_submission} end)
-    expect(Feedback.Mock, :report_invalid_submission, fn nil -> :ok end)
+    expect(Feedback.Mock, :report_invalid_submission, fn :nil_submission -> :ok end)
 
     SubmitRestaurant.submit(nil, @config)
   end
