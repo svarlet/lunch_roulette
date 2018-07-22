@@ -1,19 +1,28 @@
 #+TODO: TODO DOING | DONE WONT_FIX
 
 * Submit restaurant
-** Interactor
-*** Tests to write [5/5]
-**** DONE nil submission
-     CLOSED: [2018-07-22 Sun 19:13]
-**** DONE restaurant name is nil
-     CLOSED: [2018-07-22 Sun 19:19]
-**** DONE restaurnat name is empty
-     CLOSED: [2018-07-22 Sun 19:25]
-**** DONE restaurant already shortlisted
-     CLOSED: [2018-07-22 Sun 19:09]
-**** DONE restaurant off shortlist
-     CLOSED: [2018-07-22 Sun 18:58]
+** Interactor [5/5]
+*** DONE nil submission
+    CLOSED: [2018-07-22 Sun 19:13]
+*** DONE restaurant name is nil
+    CLOSED: [2018-07-22 Sun 19:19]
+*** DONE restaurnat name is empty
+    CLOSED: [2018-07-22 Sun 19:25]
+*** DONE restaurant already shortlisted
+    CLOSED: [2018-07-22 Sun 19:09]
+*** DONE restaurant off shortlist
+    CLOSED: [2018-07-22 Sun 18:58]
 
-** Validator
-** Shortlist
-** Feedback
+** Validator [0/4]
+*** TODO nil restaurant -> {:error, :nil_restaurant_name}
+*** TODO with empty name -> {:error, :empty_restaurant_name}
+*** TODO with nil name -> {:error, :nil_restaurant_name}
+*** TODO anything else -> {:ok, restaurant}
+** Shortlist [0/2]
+*** TODO shortlisted -> {:error, :already_shortlisted}
+*** TODO not listed -> {:ok, restaurant}
+** Feedback [0/4]
+*** TODO report_success -> :ok
+*** TODO report_already_shortlisted -> :ok
+*** TODO report_invalid_submission -> :ok
+*** TODO Make a case template as many impl are likely to exist
