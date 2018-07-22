@@ -17,7 +17,13 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
 
   test "restaurant not listed" do
     restaurant = %Restaurant{name: "Pizza Express"}
-    config = %Config{validator_mod: Validator.Mock, shortlist_mod: Shortlist.Mock, feedback_mod: Feedback.Mock}
+
+    config = %Config{
+      validator_mod: Validator.Mock,
+      shortlist_mod: Shortlist.Mock,
+      feedback_mod: Feedback.Mock
+    }
+
     expect(Validator.Mock, :validate, fn ^restaurant -> {:ok, restaurant} end)
     expect(Shortlist.Mock, :shortlist, fn ^restaurant -> {:ok, restaurant} end)
     expect(Feedback.Mock, :report_success, fn ^restaurant -> :ok end)
