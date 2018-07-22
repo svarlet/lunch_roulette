@@ -4,7 +4,7 @@
 version: 2
 jobs:
   build:
-    parallelism: 1
+    parallelism: 16
     docker:
       # specify the version here
       - image: circleci/elixir:1.6
