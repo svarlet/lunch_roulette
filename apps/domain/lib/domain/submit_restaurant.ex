@@ -7,15 +7,15 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
   alias LunchRoulette.Business.Restaurant
 
   defmodule Validator do
-    @callback validate(Restaurant.t) :: {:ok, Restaurant.t}
+    @callback validate(Restaurant.t()) :: {:ok, Restaurant.t()}
   end
 
   defmodule Shortlist do
-    @callback shortlist(Restaurant.t) :: {:ok, Restaurant.t}
+    @callback shortlist(Restaurant.t()) :: {:ok, Restaurant.t()}
   end
 
   defmodule Feedback do
-    @callback report_success(Restaurant.t) :: no_return
+    @callback report_success(Restaurant.t()) :: no_return
   end
 
   def submit(restaurant, validator_mod, shortlist_mod, feedback_mod) do
