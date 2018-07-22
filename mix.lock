@@ -1,3 +1,4 @@
 %{
+  "faker": {:hex, :faker, "0.10.0", "367c2ae47e7b4ac6410e1eaa880c07b5fe4194476f697d37ac1ce25f3058aae2", [:mix], [], "hexpm"},
   "mox": {:hex, :mox, "0.4.0", "7f120840f7d626184a3d65de36189ca6f37d432e5d63acd80045198e4c5f7e6e", [:mix], [], "hexpm"},
 }
