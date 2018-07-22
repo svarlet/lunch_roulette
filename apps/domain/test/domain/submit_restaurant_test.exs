@@ -4,10 +4,8 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
   import Mox
 
   alias LunchRoulette.Business.Restaurant
-  alias LunchRoulette.Business.SubmitRestaurant.Validator
-  alias LunchRoulette.Business.SubmitRestaurant.Shortlist
-  alias LunchRoulette.Business.SubmitRestaurant.Feedback
   alias LunchRoulette.Business.SubmitRestaurant
+  alias LunchRoulette.Business.SubmitRestaurant.{Validator, Shortlist, Feedback}
 
   setup :verify_on_exit!
 
