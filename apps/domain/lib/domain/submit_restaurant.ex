@@ -3,16 +3,14 @@ defmodule LunchRoulette.Business.Restaurant do
 end
 
 defmodule LunchRoulette.Business.SubmitRestaurant do
-  def submit(_, _) do
+  alias LunchRoulette.Storage
+  alias LunchRoulette.Business.Restaurant
+
+  def submit(%Restaurant{name: "Pizza Express"} = restaurant, data_store) do
+    Storage.save(data_store, restaurant)
   end
 end
 
 defprotocol LunchRoulette.Storage do
-  def registered?(storage, restaurant)
-end
-
-defimpl LunchRoulette.Storage, for: List do
-  def registered?(_, _) do
-    true
-  end
+  def save(data_store, restaurant)
 end

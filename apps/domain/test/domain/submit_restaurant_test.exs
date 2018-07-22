@@ -4,12 +4,22 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
   alias LunchRoulette.Business.{Restaurant, SubmitRestaurant}
   alias LunchRoulette.Storage
 
+  defmodule MockStorage do
+    defstruct restaurants: []
+
+    defimpl Storage do
+      def save(_data_store, restaurant) do
+        send(self(), {:saved, restaurant})
+      end
+    end
+  end
+
   describe "given a valid and unregistered restaurant" do
     test "should persist the restaurant to the data store" do
-      store = []
+      store = %MockStorage{}
       restaurant = %Restaurant{name: "Pizza Express"}
       SubmitRestaurant.submit(restaurant, store)
-      assert Storage.registered?(store, "Pizza Express")
+      assert_received {:saved, ^restaurant}
     end
 
     # test "should persist another restaurant to the data store" do
