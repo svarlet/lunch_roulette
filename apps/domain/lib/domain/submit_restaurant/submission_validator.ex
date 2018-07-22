@@ -7,10 +7,13 @@ defmodule LunchRoulette.Business.SubmitRestaurant.Validator.SubmissionValidator 
     case restaurant do
       nil ->
         {:error, :nil_submission}
+
       %Restaurant{name: ""} ->
         {:error, :empty_restaurant_name}
+
       %Restaurant{name: nil} ->
         {:error, :nil_restaurant_name}
+
       %Restaurant{} = restaurant ->
         {:ok, restaurant}
     end
