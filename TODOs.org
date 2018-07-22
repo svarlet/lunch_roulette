@@ -1,10 +1,11 @@
 #+TODO: TODO DOING | DONE WONT_FIX
 
 * Submit restaurant
-** Tests to write [1/5]
+** Tests to write [2/5]
 *** TODO nil submission
 *** TODO restaurant name is nil
 *** TODO restaurnat name is empty
-*** DOING restaurant already shortlisted
+*** DONE restaurant already shortlisted
+    CLOSED: [2018-07-22 Sun 19:09]
 *** DONE restaurant off shortlist
     CLOSED: [2018-07-22 Sun 18:58]
