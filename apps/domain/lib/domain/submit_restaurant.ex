@@ -33,6 +33,7 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
     else
       {:error, :already_shortlisted} ->
         config.feedback_mod.report_already_shortlisted(restaurant)
+
       {:error, :nil_submission} ->
         config.feedback_mod.report_invalid_submission(nil)
     end
