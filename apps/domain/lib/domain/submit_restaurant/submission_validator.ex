@@ -10,4 +10,8 @@ defmodule LunchRoulette.Business.SubmitRestaurant.Validator.SubmissionValidator 
   def validate(%Restaurant{name: ""}) do
     {:error, :empty_restaurant_name}
   end
+
+  def validate(%Restaurant{name: nil}) do
+    {:error, :nil_restaurant_name}
+  end
 end
