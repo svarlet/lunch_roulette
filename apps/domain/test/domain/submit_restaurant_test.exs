@@ -49,6 +49,16 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
   end
 
   test "nil restaurant name" do
+    restaurant = %Restaurant{name: nil}
+
+    expect(Validator.Mock, :validate, fn ^restaurant -> {:error, :nil_restaurant_name} end)
+    expect(Feedback.Mock, :report_invalid_submission, fn :nil_restaurant_name -> :ok end)
+
+    SubmitRestaurant.submit(restaurant, @config)
+  end
+
+  @tag :skip
+  test "empty restaurant name" do
     expect(Validator.Mock, :validate, fn nil -> {:error, :nil_restaurant_name} end)
     expect(Feedback.Mock, :report_invalid_submission, fn :nil_restaurant_name -> :ok end)
 
