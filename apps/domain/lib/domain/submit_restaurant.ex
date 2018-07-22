@@ -36,6 +36,9 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
 
       {:error, :nil_submission} ->
         config.feedback_mod.report_invalid_submission(nil)
+
+      {:error, :nil_restaurant_name} ->
+        config.feedback_mod.report_invalid_submission(:nil_restaurant_name)
     end
   end
 end
