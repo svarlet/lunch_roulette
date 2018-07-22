@@ -17,7 +17,9 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
   end
 
   defmodule Shortlist do
-    @callback shortlist(Restaurant.t()) :: {:ok, Restaurant.t()}
+    @type result :: {:ok, Restaurant.t()} | {:error, :already_shortlisted}
+
+    @callback shortlist(Restaurant.t()) :: result
   end
 
   defmodule Feedback do
