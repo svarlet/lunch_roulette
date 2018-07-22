@@ -18,6 +18,8 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
     @callback report_success(Restaurant.t()) :: no_return
 
     @callback report_already_shortlisted(Restaurant.t()) :: no_return
+
+    @callback report_invalid_submission(Restaurant.t()) :: no_return
   end
 
   defmodule Config do
@@ -31,6 +33,8 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
     else
       {:error, :already_shortlisted} ->
         config.feedback_mod.report_already_shortlisted(restaurant)
+      {:error, :nil_submission} ->
+        config.feedback_mod.report_invalid_submission(nil)
     end
   end
 end
