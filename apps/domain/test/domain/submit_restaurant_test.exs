@@ -9,14 +9,11 @@ defmodule LunchRoulette.Business.SubmitRestaurantTest do
 
   setup :verify_on_exit!
 
-  defmock LunchRoulette.Business.SubmitRestaurant.Validator.Mock,
-    for: LunchRoulette.Business.SubmitRestaurant.Validator
+  defmock Validator.Mock, for: Validator
 
-  defmock LunchRoulette.Business.SubmitRestaurant.Shortlist.Mock,
-    for: LunchRoulette.Business.SubmitRestaurant.Shortlist
+  defmock Shortlist.Mock, for: Shortlist
 
-  defmock LunchRoulette.Business.SubmitRestaurant.Feedback.Mock,
-    for: LunchRoulette.Business.SubmitRestaurant.Feedback
+  defmock Feedback.Mock, for: Feedback
 
   test "restaurant not listed" do
     restaurant = %Restaurant{name: "Pizza Express"}
