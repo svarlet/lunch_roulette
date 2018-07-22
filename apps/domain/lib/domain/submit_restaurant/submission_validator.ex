@@ -3,19 +3,16 @@ defmodule LunchRoulette.Business.SubmitRestaurant.Validator.SubmissionValidator 
 
   alias LunchRoulette.Business.Restaurant
 
-  def validate(nil) do
-    {:error, :nil_submission}
-  end
-
-  def validate(%Restaurant{name: ""}) do
-    {:error, :empty_restaurant_name}
-  end
-
-  def validate(%Restaurant{name: nil}) do
-    {:error, :nil_restaurant_name}
-  end
-
-  def validate(%Restaurant{} = restaurant) do
-    {:ok, restaurant}
+  def validate(restaurant) do
+    case restaurant do
+      nil ->
+        {:error, :nil_submission}
+      %Restaurant{name: ""} ->
+        {:error, :empty_restaurant_name}
+      %Restaurant{name: nil} ->
+        {:error, :nil_restaurant_name}
+      %Restaurant{} = restaurant ->
+        {:ok, restaurant}
+    end
   end
 end
