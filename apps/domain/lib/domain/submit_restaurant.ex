@@ -18,10 +18,14 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
     @callback report_success(Restaurant.t()) :: no_return
   end
 
-  def submit(restaurant, validator_mod, shortlist_mod, feedback_mod) do
-    with {:ok, ^restaurant} <- validator_mod.validate(restaurant),
-         {:ok, ^restaurant} <- shortlist_mod.shortlist(restaurant) do
-      feedback_mod.report_success(restaurant)
+  defmodule Config do
+    defstruct [:validator_mod, :shortlist_mod, :feedback_mod]
+  end
+
+  def submit(restaurant, config) do
+    with {:ok, ^restaurant} <- config.validator_mod.validate(restaurant),
+         {:ok, ^restaurant} <- config.shortlist_mod.shortlist(restaurant) do
+      config.feedback_mod.report_success(restaurant)
     end
   end
 end
