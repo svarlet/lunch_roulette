@@ -5,6 +5,7 @@ defmodule LunchRoulette.MixProject do
     [
       apps_path: "apps",
       start_permanent: Mix.env() == :prod,
+      consolidate_protocols: Mix.env != :test,
       deps: deps()
     ]
   end

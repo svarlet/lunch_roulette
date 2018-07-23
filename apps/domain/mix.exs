@@ -11,7 +11,6 @@ defmodule Domain.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
-      consolidate_protocols: Mix.env != :test,
       deps: deps()
     ]
   end
