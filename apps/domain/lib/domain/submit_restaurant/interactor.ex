@@ -16,10 +16,12 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
     @callback validate(Restaurant.t()) :: result
   end
 
-  defmodule Shortlist do
-    @type result :: {:ok, Restaurant.t()} | {:error, :already_shortlisted}
+  defprotocol Shortlist do
+    @type shortlist :: any
+    @type result :: {:ok, shortlist} | {:error, :already_shortlisted}
 
-    @callback shortlist(Restaurant.t()) :: result
+    @spec put_in(shortlist, Restaurant.t()) :: result
+    def put_in(shortlist, restaurant)
   end
 
   defmodule Feedback do
@@ -31,13 +33,14 @@ defmodule LunchRoulette.Business.SubmitRestaurant do
   end
 
   defmodule Config do
-    defstruct [:validator_mod, :shortlist_mod, :feedback_mod]
+    defstruct [:validator_mod, :shortlist, :feedback_mod]
   end
 
   defmodule Interactor do
     def submit(restaurant, config) do
       with {:ok, ^restaurant} <- config.validator_mod.validate(restaurant),
-           {:ok, ^restaurant} <- config.shortlist_mod.shortlist(restaurant) do
+           {:ok, _shortlist} <- Shortlist.put_in(config.shortlist, restaurant) do
+           # {:ok, ^restaurant} <- config.shortlist_mod.shortlist(restaurant) do
         config.feedback_mod.report_success(restaurant)
       else
         {:error, :already_shortlisted} ->
