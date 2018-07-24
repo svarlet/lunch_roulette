@@ -19,7 +19,7 @@ defmodule Domain.SubmitRestaurant.AgentShortlistTest do
 
     Enum.each(restaurants, &Shortlist.put_in(shortlist, &1))
 
-    assert MapSet.new(restaurants) == Agent.get(shortlist.pid, &(&1))
+    assert MapSet.new(restaurants) == Agent.get(shortlist.pid, & &1)
   end
 
   defp create_few_restaurants() do
