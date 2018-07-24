@@ -9,7 +9,7 @@ defmodule Domain.SubmitRestaurant.AgentShortlistTest do
     shortlist = %AgentShortlist{pid: pid}
     restaurant = %Restaurant{name: Faker.Company.name()}
     assert {:ok, shortlist} == Shortlist.put_in(shortlist, restaurant)
-    assert Agent.get(shortlist.pid, fn mapset -> MapSet.member?(mapset, restaurant) end)
+    assert Agent.get(shortlist.pid, & MapSet.member?(&1, restaurant))
   end
 
   test "put_in 3 restaurants" do
