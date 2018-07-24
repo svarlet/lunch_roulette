@@ -1,5 +1,7 @@
-defmodule LunchRoulette.Business.SubmitRestaurant.Validator do
+defprotocol LunchRoulette.Business.SubmitRestaurant.Validator do
   alias LunchRoulette.Business.Restaurant
+
+  @type validator :: any
 
   @type result ::
           {:ok, Restaurant.t()}
@@ -7,7 +9,8 @@ defmodule LunchRoulette.Business.SubmitRestaurant.Validator do
           | {:error, :nil_restaurant_name}
           | {:error, :empty_restaurant_name}
 
-  @callback validate(Restaurant.t()) :: result
+  @spec validate(validator, Restaurant.t()) :: result
+  def validate(validator, restaurant)
 end
 
 defprotocol LunchRoulette.Business.SubmitRestaurant.Shortlist do

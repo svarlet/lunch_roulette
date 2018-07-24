@@ -1,21 +1,24 @@
 defmodule LunchRoulette.Business.SubmitRestaurant.Validator.SubmissionValidator do
-  @behaviour LunchRoulette.Business.SubmitRestaurant.Validator
-
   alias LunchRoulette.Business.Restaurant
+  alias LunchRoulette.Business.SubmitRestaurant.Validator
 
-  def validate(restaurant) do
-    case restaurant do
-      nil ->
-        {:error, :nil_submission}
+  defstruct []
 
-      %Restaurant{name: ""} ->
-        {:error, :empty_restaurant_name}
+  defimpl Validator do
+    def validate(_validator, restaurant) do
+      case restaurant do
+        nil ->
+          {:error, :nil_submission}
 
-      %Restaurant{name: nil} ->
-        {:error, :nil_restaurant_name}
+        %Restaurant{name: ""} ->
+          {:error, :empty_restaurant_name}
 
-      %Restaurant{} = restaurant ->
-        {:ok, restaurant}
+        %Restaurant{name: nil} ->
+          {:error, :nil_restaurant_name}
+
+        %Restaurant{} = restaurant ->
+          {:ok, restaurant}
+      end
     end
   end
 end

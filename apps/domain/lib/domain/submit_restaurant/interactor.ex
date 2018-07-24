@@ -4,14 +4,14 @@ defmodule LunchRoulette.Business.Restaurant do
 end
 
 defmodule LunchRoulette.Business.SubmitRestaurant.Config do
-  defstruct [:validator_mod, :shortlist, :feedback_mod]
+  defstruct [:validator, :shortlist, :feedback_mod]
 end
 
 defmodule LunchRoulette.Business.SubmitRestaurant.Interactor do
-  alias LunchRoulette.Business.SubmitRestaurant.Shortlist
+  alias LunchRoulette.Business.SubmitRestaurant.{Validator, Shortlist}
 
   def submit(restaurant, config) do
-    with {:ok, ^restaurant} <- config.validator_mod.validate(restaurant),
+    with {:ok, ^restaurant} <- Validator.validate(config.validator, restaurant),
          {:ok, _shortlist} <- Shortlist.put_in(config.shortlist, restaurant) do
       config.feedback_mod.report_success(restaurant)
     else
