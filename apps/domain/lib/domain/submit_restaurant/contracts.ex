@@ -23,12 +23,17 @@ defprotocol LunchRoulette.Business.SubmitRestaurant.Shortlist do
   def put_in(shortlist, restaurant)
 end
 
-defmodule LunchRoulette.Business.SubmitRestaurant.Feedback do
+defprotocol LunchRoulette.Business.SubmitRestaurant.Feedback do
   alias LunchRoulette.Business.Restaurant
 
-  @callback report_success(Restaurant.t()) :: no_return
+  @type feedback :: any
 
-  @callback report_already_shortlisted(Restaurant.t()) :: no_return
+  @spec report_success(feedback, Restaurant.t()) :: no_return
+  def report_success(feedback, restaurant)
 
-  @callback report_invalid_submission(Restaurant.t()) :: no_return
+  @spec report_already_shortlisted(feedback, Restaurant.t()) :: no_return
+  def report_already_shortlisted(feedback, restaurant)
+
+  @spec report_invalid_submission(feedback, Restaurant.t()) :: no_return
+  def report_invalid_submission(feedback, restaurant)
 end

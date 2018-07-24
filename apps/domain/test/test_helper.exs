@@ -25,3 +25,23 @@ defmodule LunchRoulette.Business.SubmitRestaurant.Validator.Mock do
     end
   end
 end
+
+defmodule LunchRoulette.Business.SubmitRestaurant.Feedback.Mock do
+  alias LunchRoulette.Business.SubmitRestaurant.Feedback
+
+  defstruct []
+
+  defimpl Feedback do
+    def report_success(feedback, restaurant) do
+      send self(), {:report_success, feedback, restaurant}
+    end
+
+    def report_already_shortlisted(feedback, restaurant) do
+      send self(), {:report_already_shortlisted, feedback, restaurant}
+    end
+
+    def report_invalid_submission(feedback, restaurant) do
+      send self(), {:report_invalid_submission, feedback, restaurant}
+    end
+  end
+end

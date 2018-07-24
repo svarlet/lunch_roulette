@@ -1,19 +1,13 @@
 defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
   use ExUnit.Case, async: true
 
-  import Mox
-
   alias LunchRoulette.Business.Restaurant
   alias LunchRoulette.Business.SubmitRestaurant.{Shortlist, Interactor, Validator, Feedback, Config}
-
-  setup :verify_on_exit!
-
-  defmock(Feedback.Mock, for: Feedback)
 
   @config %Config{
     validator: %Validator.Mock{},
     shortlist: %Shortlist.Mock{},
-    feedback_mod: Feedback.Mock
+    feedback: %Feedback.Mock{}
   }
 
   defp with_shortlist_mock(config, canned_result) do
@@ -36,14 +30,14 @@ defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
       |> with_shortlist_mock({:ok, @config.shortlist})
       |> with_validator_mock({:ok, a_restaurant})
 
-    expect(Feedback.Mock, :report_success, fn ^a_restaurant -> :ok end)
-
     Interactor.submit(a_restaurant, config)
 
     assert_received {:put_in, shortlist, ^a_restaurant}
     assert shortlist == config.shortlist
     assert_received {:validate, validator, ^a_restaurant}
     assert validator == config.validator
+    assert_received {:report_success, feedback, ^a_restaurant}
+    assert feedback == config.feedback
   end
 
   test "restaurant already shortlisted", %{a_restaurant: a_restaurant} do
@@ -51,7 +45,6 @@ defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
       @config
       |> with_shortlist_mock({:error, :already_shortlisted})
       |> with_validator_mock({:ok, a_restaurant})
-    expect(Feedback.Mock, :report_already_shortlisted, fn ^a_restaurant -> :ok end)
 
     Interactor.submit(a_restaurant, config)
 
@@ -59,41 +52,46 @@ defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
     assert shortlist == config.shortlist
     assert_received {:validate, validator, ^a_restaurant}
     assert validator == config.validator
+    assert_received {:report_already_shortlisted, feedback, ^a_restaurant}
+    assert feedback == config.feedback
   end
 
   test "nil submission", %{a_restaurant: a_restaurant} do
     config =
       @config
       |> with_validator_mock({:error, :nil_submission})
-    expect(Feedback.Mock, :report_invalid_submission, fn :nil_submission -> :ok end)
 
     Interactor.submit(a_restaurant, config)
 
     assert_received {:validate, validator, ^a_restaurant}
     assert validator == config.validator
+    assert_received {:report_invalid_submission, feedback, :nil_submission}
+    assert feedback == config.feedback
   end
 
   test "nil restaurant name", %{a_restaurant: a_restaurant} do
     config =
       @config
       |> with_validator_mock({:error, :nil_restaurant_name})
-    expect(Feedback.Mock, :report_invalid_submission, fn :nil_restaurant_name -> :ok end)
 
     Interactor.submit(a_restaurant, config)
 
     assert_received {:validate, validator, ^a_restaurant}
     assert validator == config.validator
+    assert_received {:report_invalid_submission, feedback, :nil_restaurant_name}
+    assert feedback == config.feedback
   end
 
   test "empty restaurant name", %{a_restaurant: a_restaurant} do
     config =
       @config
       |> with_validator_mock({:error, :empty_restaurant_name})
-    expect(Feedback.Mock, :report_invalid_submission, fn :empty_restaurant_name -> :ok end)
 
     Interactor.submit(a_restaurant, config)
 
     assert_received {:validate, validator, ^a_restaurant}
     assert validator == config.validator
+    assert_received {:report_invalid_submission, feedback, :empty_restaurant_name}
+    assert feedback == config.feedback
   end
 end
