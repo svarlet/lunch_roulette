@@ -4,17 +4,18 @@ defmodule Domain.SubmitRestaurant.AgentShortlistTest do
   alias Domain.Restaurant
   alias Domain.SubmitRestaurant.{Shortlist, AgentShortlist}
 
-  test "put_in 1 restaurant" do
+  setup do
     {:ok, pid} = Agent.start_link(fn -> MapSet.new() end)
-    shortlist = %AgentShortlist{pid: pid}
+    %{shortlist: %AgentShortlist{pid: pid}}
+  end
+
+  test "put_in 1 restaurant", %{shortlist: shortlist} do
     restaurant = %Restaurant{name: Faker.Company.name()}
     assert {:ok, shortlist} == Shortlist.put_in(shortlist, restaurant)
     assert Agent.get(shortlist.pid, &MapSet.member?(&1, restaurant))
   end
 
-  test "put_in 3 restaurants" do
-    {:ok, pid} = Agent.start_link(fn -> MapSet.new() end)
-    shortlist = %AgentShortlist{pid: pid}
+  test "put_in 3 restaurants", %{shortlist: shortlist} do
     restaurants = create_few_restaurants()
 
     Enum.each(restaurants, &Shortlist.put_in(shortlist, &1))
@@ -28,9 +29,7 @@ defmodule Domain.SubmitRestaurant.AgentShortlistTest do
     |> Enum.map(fn name -> %Restaurant{name: name} end)
   end
 
-  test "put_in 1 already shortlisted restaurant" do
-    {:ok, pid} = Agent.start_link(fn -> MapSet.new() end)
-    shortlist = %AgentShortlist{pid: pid}
+  test "put_in 1 already shortlisted restaurant", %{shortlist: shortlist} do
     restaurant = %Restaurant{name: Faker.Company.name()}
     assert {:ok, shortlist} == Shortlist.put_in(shortlist, restaurant)
     assert {:error, :already_shortlisted} == Shortlist.put_in(shortlist, restaurant)
