@@ -1,14 +1,14 @@
-defmodule LunchRoulette.Business.Restaurant do
+defmodule Domain.Restaurant do
   @type t :: %__MODULE__{name: String.t()}
   defstruct [:name]
 end
 
-defmodule LunchRoulette.Business.SubmitRestaurant.Config do
+defmodule Domain.SubmitRestaurant.Config do
   defstruct [:validator, :shortlist, :feedback]
 end
 
-defmodule LunchRoulette.Business.SubmitRestaurant.Interactor do
-  alias LunchRoulette.Business.SubmitRestaurant.{Feedback, Validator, Shortlist}
+defmodule Domain.SubmitRestaurant.Interactor do
+  alias Domain.SubmitRestaurant.{Feedback, Validator, Shortlist}
 
   def submit(restaurant, config) do
     with {:ok, ^restaurant} <- Validator.validate(config.validator, restaurant),

@@ -1,8 +1,8 @@
-defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
+defmodule Domain.SubmitRestaurant.InteractorTest do
   use ExUnit.Case, async: true
 
-  alias LunchRoulette.Business.Restaurant
-  alias LunchRoulette.Business.SubmitRestaurant.{Shortlist, Interactor, Validator, Feedback, Config}
+  alias Domain.Restaurant
+  alias Domain.SubmitRestaurant.{Shortlist, Interactor, Validator, Feedback, Config}
 
   @config %Config{
     validator: %Validator.Mock{},

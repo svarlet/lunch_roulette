@@ -1,6 +1,6 @@
-defmodule LunchRoulette.Business.SubmitRestaurant.Validator.SubmissionValidator do
-  alias LunchRoulette.Business.Restaurant
-  alias LunchRoulette.Business.SubmitRestaurant.Validator
+defmodule Domain.SubmitRestaurant.Validator.SubmissionValidator do
+  alias Domain.Restaurant
+  alias Domain.SubmitRestaurant.Validator
 
   defstruct []
 

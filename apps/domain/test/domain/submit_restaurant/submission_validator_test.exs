@@ -1,9 +1,9 @@
-defmodule LunchRoulette.Business.SubmitRestaurant.Validator.SubmissionValidatorTest do
+defmodule Domain.SubmitRestaurant.Validator.SubmissionValidatorTest do
   use ExUnit.Case, async: true
 
-  alias LunchRoulette.Business.Restaurant
-  alias LunchRoulette.Business.SubmitRestaurant.Validator
-  alias LunchRoulette.Business.SubmitRestaurant.Validator.SubmissionValidator
+  alias Domain.Restaurant
+  alias Domain.SubmitRestaurant.Validator
+  alias Domain.SubmitRestaurant.Validator.SubmissionValidator
 
   @validator %SubmissionValidator{}
 

@@ -1,7 +1,7 @@
 ExUnit.start()
 
-defmodule LunchRoulette.Business.SubmitRestaurant.Shortlist.Mock do
-  alias LunchRoulette.Business.SubmitRestaurant.Shortlist
+defmodule Domain.SubmitRestaurant.Shortlist.Mock do
+  alias Domain.SubmitRestaurant.Shortlist
 
   defstruct [:put_in_result]
 
@@ -13,8 +13,8 @@ defmodule LunchRoulette.Business.SubmitRestaurant.Shortlist.Mock do
   end
 end
 
-defmodule LunchRoulette.Business.SubmitRestaurant.Validator.Mock do
-  alias LunchRoulette.Business.SubmitRestaurant.Validator
+defmodule Domain.SubmitRestaurant.Validator.Mock do
+  alias Domain.SubmitRestaurant.Validator
 
   defstruct [:validate_result]
 
@@ -26,8 +26,8 @@ defmodule LunchRoulette.Business.SubmitRestaurant.Validator.Mock do
   end
 end
 
-defmodule LunchRoulette.Business.SubmitRestaurant.Feedback.Mock do
-  alias LunchRoulette.Business.SubmitRestaurant.Feedback
+defmodule Domain.SubmitRestaurant.Feedback.Mock do
+  alias Domain.SubmitRestaurant.Feedback
 
   defstruct []
 

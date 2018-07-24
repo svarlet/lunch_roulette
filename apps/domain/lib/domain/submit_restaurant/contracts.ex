@@ -1,5 +1,5 @@
-defprotocol LunchRoulette.Business.SubmitRestaurant.Validator do
-  alias LunchRoulette.Business.Restaurant
+defprotocol Domain.SubmitRestaurant.Validator do
+  alias Domain.Restaurant
 
   @type validator :: any
 
@@ -13,8 +13,8 @@ defprotocol LunchRoulette.Business.SubmitRestaurant.Validator do
   def validate(validator, restaurant)
 end
 
-defprotocol LunchRoulette.Business.SubmitRestaurant.Shortlist do
-  alias LunchRoulette.Business.Restaurant
+defprotocol Domain.SubmitRestaurant.Shortlist do
+  alias Domain.Restaurant
 
   @type shortlist :: any
   @type result :: {:ok, shortlist} | {:error, :already_shortlisted}
@@ -23,8 +23,8 @@ defprotocol LunchRoulette.Business.SubmitRestaurant.Shortlist do
   def put_in(shortlist, restaurant)
 end
 
-defprotocol LunchRoulette.Business.SubmitRestaurant.Feedback do
-  alias LunchRoulette.Business.Restaurant
+defprotocol Domain.SubmitRestaurant.Feedback do
+  alias Domain.Restaurant
 
   @type feedback :: any
 
