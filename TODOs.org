@@ -24,7 +24,7 @@
     CLOSED: [2018-07-22 Sun 23:29]
 ** Shortlist [0/2]
 *** TODO shortlisted -> {:error, :already_shortlisted}
-*** TODO not listed -> {:ok, restaurant}
+*** TODO not listed -> {:ok, shortlist}
 ** Feedback [0/4]
 *** TODO report_success -> :ok
 *** TODO report_already_shortlisted -> :ok
