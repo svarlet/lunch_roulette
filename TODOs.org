@@ -30,6 +30,7 @@
 *** TODO report_already_shortlisted -> :ok
 *** TODO report_invalid_submission -> :ok
 *** TODO Make a case template as many impl are likely to exist
-** Refactoring [0/2]
-*** ASSESS Rename LunchRoulette.Business to Domain (like the app)
+** Refactoring [1/2]
+*** DONE Rename LunchRoulette.Business to Domain (like the app)
+    CLOSED: [2018-07-24 Tue 21:27]
 *** ASSESS Create an abstract factory to create %Config in tests ?
