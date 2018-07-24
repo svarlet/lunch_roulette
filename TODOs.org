@@ -22,9 +22,11 @@
     CLOSED: [2018-07-22 Sun 23:21]
 *** DONE anything else -> {:ok, restaurant}
     CLOSED: [2018-07-22 Sun 23:29]
-** Shortlist [0/2]
-*** TODO shortlisted -> {:error, :already_shortlisted}
-*** TODO not listed -> {:ok, shortlist}
+** Shortlist [2/2]
+*** DONE shortlisted -> {:error, :already_shortlisted}
+    CLOSED: [2018-07-25 Wed 00:02]
+*** DONE not listed -> {:ok, shortlist}
+    CLOSED: [2018-07-25 Wed 00:02]
 ** Feedback [0/4]
 *** TODO report_success -> :ok
 *** TODO report_already_shortlisted -> :ok
