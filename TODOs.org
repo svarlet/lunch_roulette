@@ -1,4 +1,4 @@
-#+TODO: TODO DOING | DONE WONT_FIX
+#+TODO: TODO ASSESS DOING | DONE WONT_FIX
 
 * Submit restaurant
 ** Interactor [5/5]
@@ -30,5 +30,6 @@
 *** TODO report_already_shortlisted -> :ok
 *** TODO report_invalid_submission -> :ok
 *** TODO Make a case template as many impl are likely to exist
-** Refactoring [0/1]
-*** TODO Rename LunchRoulette.Business to Domain (like the app)
+** Refactoring [0/2]
+*** ASSESS Rename LunchRoulette.Business to Domain (like the app)
+*** ASSESS Create an abstract factory to create %Config in tests ?
