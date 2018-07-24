@@ -30,3 +30,5 @@
 *** TODO report_already_shortlisted -> :ok
 *** TODO report_invalid_submission -> :ok
 *** TODO Make a case template as many impl are likely to exist
+** Refactoring [0/1]
+*** TODO Rename LunchRoulette.Business to Domain (like the app)
