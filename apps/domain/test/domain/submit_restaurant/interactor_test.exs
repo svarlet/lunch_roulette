@@ -57,9 +57,7 @@ defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
   end
 
   test "nil submission", %{a_restaurant: a_restaurant} do
-    config =
-      @config
-      |> with_validator_mock({:error, :nil_submission})
+    config = with_validator_mock(@config, {:error, :nil_submission})
 
     Interactor.submit(a_restaurant, config)
 
@@ -70,9 +68,7 @@ defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
   end
 
   test "nil restaurant name", %{a_restaurant: a_restaurant} do
-    config =
-      @config
-      |> with_validator_mock({:error, :nil_restaurant_name})
+    config = with_validator_mock(@config, {:error, :nil_restaurant_name})
 
     Interactor.submit(a_restaurant, config)
 
@@ -83,9 +79,7 @@ defmodule LunchRoulette.Business.SubmitRestaurant.InteractorTest do
   end
 
   test "empty restaurant name", %{a_restaurant: a_restaurant} do
-    config =
-      @config
-      |> with_validator_mock({:error, :empty_restaurant_name})
+    config = with_validator_mock(@config, {:error, :empty_restaurant_name})
 
     Interactor.submit(a_restaurant, config)
 
