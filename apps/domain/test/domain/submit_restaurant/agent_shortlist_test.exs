@@ -27,4 +27,12 @@ defmodule Domain.SubmitRestaurant.AgentShortlistTest do
     |> Enum.map(fn unique_name -> "restaurant_#{unique_name}" end)
     |> Enum.map(fn name -> %Restaurant{name: name} end)
   end
+
+  test "put_in 1 already shortlisted restaurant" do
+    {:ok, pid} = Agent.start_link(fn -> MapSet.new() end)
+    shortlist = %AgentShortlist{pid: pid}
+    restaurant = %Restaurant{name: Faker.Company.name()}
+    assert {:ok, shortlist} == Shortlist.put_in(shortlist, restaurant)
+    assert {:error, :already_shortlisted} == Shortlist.put_in(shortlist, restaurant)
+  end
 end
