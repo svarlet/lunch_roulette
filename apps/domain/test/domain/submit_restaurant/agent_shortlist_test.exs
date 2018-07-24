@@ -17,9 +17,7 @@ defmodule Domain.SubmitRestaurant.AgentShortlistTest do
 
   test "put_in 3 restaurants", %{shortlist: shortlist} do
     restaurants = create_few_restaurants()
-
     Enum.each(restaurants, &Shortlist.put_in(shortlist, &1))
-
     assert MapSet.new(restaurants) == Agent.get(shortlist.pid, & &1)
   end
 
