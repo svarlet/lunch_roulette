@@ -1,7 +1,7 @@
 #+TODO: TODO ASSESS DOING | DONE WONT_FIX
 
 * Submit restaurant
-** Interactor [0/5]
+** Policy [0/5]
 *** TODO nil submission
 *** TODO restaurant name is nil
 *** TODO restaurnat name is empty
