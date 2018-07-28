@@ -13,4 +13,9 @@ defmodule Domain.SubmitRestaurantTest do
     anonymous_restaurant = %Restaurant{name: nil}
     assert {:error, {:validation, :anonymous}} == submit(anonymous_restaurant)
   end
+
+  test "reject a restaurant with an empty name" do
+    anonymous_restaurant = %Restaurant{name: ""}
+    assert {:error, {:validation, :anonymous}} == submit(anonymous_restaurant)
+  end
 end
