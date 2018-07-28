@@ -8,4 +8,8 @@ defmodule Domain.SubmitRestaurant.Policy do
   def submit(%Restaurant{name: name}, _save) when name in ["", nil] do
     {:error, {:validation, :anonymous}}
   end
+
+  def submit(%Restaurant{} = restaurant, save) do
+    save.(restaurant)
+  end
 end

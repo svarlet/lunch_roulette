@@ -20,4 +20,11 @@ defmodule Domain.SubmitRestaurantTest do
     anonymous_restaurant = %Restaurant{name: ""}
     assert {:error, {:validation, :anonymous}} == submit(anonymous_restaurant, &unexpected_save/1)
   end
+
+  test "put on the shortlist" do
+    restaurant = %Restaurant{name: "Pizza Express"}
+    save = fn restaurant -> send(self(), {:save, restaurant}) end
+    submit(restaurant, save)
+    assert_received {:save, ^restaurant}
+  end
 end
