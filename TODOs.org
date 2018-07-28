@@ -1,10 +1,13 @@
 #+TODO: TODO ASSESS DOING | DONE WONT_FIX
 
 * Submit restaurant
-** Policy [0/5]
-*** TODO nil submission
-*** TODO restaurant name is nil
-*** TODO restaurnat name is empty
+** Policy [3/5]
+*** DONE nil submission
+    CLOSED: [2018-07-28 Sat 22:11]
+*** DONE restaurant name is nil
+    CLOSED: [2018-07-28 Sat 22:11]
+*** DONE restaurnat name is empty
+    CLOSED: [2018-07-28 Sat 22:11]
 *** TODO restaurant already shortlisted
 *** TODO restaurant off shortlist
 
