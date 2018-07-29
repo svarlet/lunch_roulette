@@ -1,15 +1,11 @@
 defmodule Domain.SubmitRestaurant.Policy do
-  alias Domain.Restaurant
+  alias Domain.SubmitRestaurant.{Canonicalization, Validation}
+  alias Result
 
-  def submit(nil, _save) do
-    {:error, {:validation, :no_restaurant}}
-  end
-
-  def submit(%Restaurant{name: name}, _save) when name in ["", nil] do
-    {:error, {:validation, :anonymous}}
-  end
-
-  def submit(%Restaurant{} = restaurant, save) do
-    save.(restaurant)
+  def submit(restaurant, save) do
+    restaurant
+    |> Canonicalization.canonicalize()
+    |> Result.bind(&Validation.validate/1)
+    |> Result.bind(save)
   end
 end
