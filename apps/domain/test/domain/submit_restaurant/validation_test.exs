@@ -7,11 +7,11 @@ defmodule Domain.SubmitRestaurant.ValidationTest do
 
   test "reject a restaurant with an empty name" do
     anonymous_restaurant = %Restaurant{name: ""}
-    assert Result.fail({:validation, :anonymous}) == validate(anonymous_restaurant)
+    assert {:error, {:validation, :anonymous}} == validate(anonymous_restaurant)
   end
 
   test "accept a restaurant with a non empty name" do
     named_restaurant = %Restaurant{name: "Pizza Express"}
-    assert Result.succeed(named_restaurant) == validate(named_restaurant)
+    assert {:ok, named_restaurant} == validate(named_restaurant)
   end
 end

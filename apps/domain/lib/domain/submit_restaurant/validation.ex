@@ -2,10 +2,10 @@ defmodule Domain.SubmitRestaurant.Validation do
   alias Domain.Restaurant
 
   def validate(%Restaurant{name: ""}) do
-    Result.fail({:validation, :anonymous})
+    {:error, {:validation, :anonymous}}
   end
 
   def validate(%Restaurant{} = restaurant) do
-    Result.succeed(restaurant)
+    {:ok, restaurant}
   end
 end

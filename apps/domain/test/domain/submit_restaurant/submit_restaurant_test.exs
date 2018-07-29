@@ -7,23 +7,23 @@ defmodule Domain.SubmitRestaurantTest do
 
   test "put on the shortlist" do
     restaurant = %Restaurant{name: "Pizza Express"}
-    assert Result.succeed(restaurant) == submit(restaurant, &successful_save/1)
+    assert {:ok, restaurant} == submit(restaurant, &successful_save/1)
     assert_received {:save, ^restaurant}
   end
 
   defp successful_save(restaurant) do
     send(self(), {:save, restaurant})
-    Result.succeed(restaurant)
+    {:ok, restaurant}
   end
 
   test "handle shortlist failure gracefully" do
     restaurant = %Restaurant{name: "Pizza Express"}
-    assert Result.fail(:already_exists) == submit(restaurant, &unsuccessful_save/1)
+    assert {:error, :already_exists} == submit(restaurant, &unsuccessful_save/1)
     assert_received {:save, ^restaurant}
   end
 
   defp unsuccessful_save(restaurant) do
     send(self(), {:save, restaurant})
-    Result.fail(:already_exists)
+    {:error, :already_exists}
   end
 end
