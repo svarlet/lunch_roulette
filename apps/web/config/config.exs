@@ -6,9 +6,9 @@
 use Mix.Config
 
 # General application configuration
-config :web,
-  namespace: Web,
-  ecto_repos: [Web.Repo]
+# config :web,
+#   namespace: Web,
+#   ecto_repos: [Web.Repo]
 
 # Configures the endpoint
 config :web, Web.Endpoint,

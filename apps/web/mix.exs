@@ -43,7 +43,8 @@ defmodule Web.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:domain, in_umbrella: true}
     ]
   end
 
@@ -52,6 +53,6 @@ defmodule Web.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+    # ["test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end
