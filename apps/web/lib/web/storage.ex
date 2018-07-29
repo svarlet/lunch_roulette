@@ -7,8 +7,12 @@ defmodule Web.Storage do
 
   def put(restaurant) do
     Agent.get_and_update(__MODULE__, fn state ->
-      new_state = MapSet.put(state, restaurant)
-      {{:ok, restaurant}, new_state}
+      if restaurant in state do
+        {{:error, :already_exists}, state}
+      else
+        new_state = MapSet.put(state, restaurant)
+        {{:ok, restaurant}, new_state}
+      end
     end)
   end
 end
