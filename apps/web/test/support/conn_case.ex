@@ -27,7 +27,7 @@ defmodule Web.ConnCase do
   end
 
 
-  setup tags do
+  setup _tags do
     # :ok = Ecto.Adapters.SQL.Sandbox.checkout(Web.Repo)
     # unless tags[:async] do
     #   Ecto.Adapters.SQL.Sandbox.mode(Web.Repo, {:shared, self()})
