@@ -14,6 +14,18 @@ defmodule Web.StorageTest do
     assert {:ok, restaurant} == Storage.put(restaurant)
   end
 
+  test "put 2 restaurants" do
+    restaurants =
+      ["The foo bar", "The foo baz"]
+      |> Enum.map(& %Restaurant{name: &1})
+
+    Enum.each(restaurants, &Storage.put/1)
+
+    Enum.each(restaurants, fn restaurant ->
+      assert Storage.shortlisted?(restaurant)
+    end)
+  end
+
   test "put a shortlisted restaurant" do
     restaurant = %Restaurant{name: "Pizza Hut"}
     Storage.put(restaurant)

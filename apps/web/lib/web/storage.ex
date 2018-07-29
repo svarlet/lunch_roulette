@@ -15,4 +15,8 @@ defmodule Web.Storage do
       end
     end)
   end
+
+  def shortlisted?(restaurant) do
+    Agent.get(__MODULE__, fn state -> restaurant in state end)
+  end
 end
