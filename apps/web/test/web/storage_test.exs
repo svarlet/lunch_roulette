@@ -17,7 +17,7 @@ defmodule Web.StorageTest do
   test "put 2 restaurants" do
     restaurants =
       ["The foo bar", "The foo baz"]
-      |> Enum.map(& %Restaurant{name: &1})
+      |> Enum.map(&%Restaurant{name: &1})
 
     Enum.each(restaurants, &Storage.put/1)
 
