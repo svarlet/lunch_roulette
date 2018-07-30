@@ -1,1 +1,1 @@
-Thanks! you've successfully shortlisted Not a shortlisted restaurant.
+Thanks! you've successfully shortlisted <%= @restaurant_name %>.
