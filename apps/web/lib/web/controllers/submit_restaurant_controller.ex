@@ -1,11 +1,8 @@
 defmodule Web.SubmitRestaurantController do
   use Web, :controller
 
-  require Logger
-  def submit(conn, params) do
-    Logger.debug inspect(params)
-
+  def submit(conn, _params) do
     conn
-    |> render("index.html")
+    |> Plug.Conn.put_status(200)
   end
 end
