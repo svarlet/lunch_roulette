@@ -1,7 +1,7 @@
 defmodule Web.DIContainerPlug do
   @behaviour Plug
 
-  def init(options) do
+  def init(options) when is_map(options) do
     options
   end
 
