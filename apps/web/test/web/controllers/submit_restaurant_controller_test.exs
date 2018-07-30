@@ -5,15 +5,16 @@ defmodule Web.SubmitRestaurantControllerTest do
   alias Plug.Conn
 
   describe "the submission of a valid not shortlisted restaurant" do
-    test "responds with http status 200" do
-      params = %{"name" => "Not a shortlisted restaurant"}
-      conn = SubmitRestaurantController.submit(%Conn{}, params)
-      assert %Conn{status: 200} = conn
+    setup do
+      %{params: %{"name" => "Not a shortlisted restaurant"}}
     end
 
-    test "respondes with content-type: text/html and utf-8 charset" do
-      params = %{"name" => "Not a shortlisted restaurant"}
-      conn = SubmitRestaurantController.submit(%Conn{}, params)
+    test "responds with http status 200", %{conn: conn, params: params} do
+      assert %Conn{status: 200} = SubmitRestaurantController.submit(conn, params)
+    end
+
+    test "respondes with content-type: text/html and utf-8 charset", %{conn: conn, params: params} do
+      conn = SubmitRestaurantController.submit(conn, params)
       assert response_content_type(conn, :html) =~ "charset=utf-8"
     end
   end
