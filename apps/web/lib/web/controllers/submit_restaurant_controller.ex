@@ -5,5 +5,6 @@ defmodule Web.SubmitRestaurantController do
     conn
     |> put_resp_content_type("text/html")
     |> put_status(200)
+    |> render("index.html")
   end
 end
