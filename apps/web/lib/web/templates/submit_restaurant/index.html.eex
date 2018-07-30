@@ -1,1 +1,1 @@
-<%= inspect(@conn) %>
+Thanks! you've successfully shortlisted Not a shortlisted restaurant.
