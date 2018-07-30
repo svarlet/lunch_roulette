@@ -1,5 +1,5 @@
 defmodule Web.SubmitRestaurantControllerTest do
-  use ExUnit.Case, async: true
+  use Web.ConnCase, async: true
 
   alias Web.SubmitRestaurantController
   alias Plug.Conn
@@ -13,6 +13,12 @@ defmodule Web.SubmitRestaurantControllerTest do
         |> SubmitRestaurantController.submit(params)
 
       assert %Conn{status: 200} = conn
+    end
+
+    test "respondes with content-type: text/html and utf-8 charset" do
+      params = %{"name" => "Not a shortlisted restaurant"}
+      conn = SubmitRestaurantController.submit(%Conn{}, params)
+      assert response_content_type(conn, :html) =~ "charset=utf-8"
     end
   end
 end
