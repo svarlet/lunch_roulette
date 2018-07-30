@@ -44,7 +44,8 @@ defmodule Web.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:domain, in_umbrella: true}
+      {:domain, in_umbrella: true},
+      {:faker, "~> 0.10"}
     ]
   end
 
