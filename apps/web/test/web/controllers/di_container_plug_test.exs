@@ -13,6 +13,9 @@ defmodule Web.DIContainerPlugTest do
     end)
   end
 
-  # init only accepts maps
-  # call sets conn.assigns
+  test "call/2 nest the supplied options under conn.assigns.di_container" do
+    options = %{foo: fn _ -> 12 end}
+    conn = DIContainerPlug.call(%Plug.Conn{}, options)
+    assert conn.assigns.di_container == options
+  end
 end

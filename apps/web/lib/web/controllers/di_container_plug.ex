@@ -5,7 +5,7 @@ defmodule Web.DIContainerPlug do
     options
   end
 
-  def call(conn, _options) do
-    conn
+  def call(conn, options) do
+    Plug.Conn.assign(conn, :di_container, options)
   end
 end
