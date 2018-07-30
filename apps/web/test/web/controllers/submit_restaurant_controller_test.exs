@@ -14,7 +14,7 @@ defmodule Web.SubmitRestaurantControllerTest do
     end
 
     @tag restaurant_name: "Yet another not shortlisted restaurant"
-    test "display a success feedback for yet another not shortlisted restaurant", %{conn: conn, name: name} do
+    test "displays a success feedback for any name", %{conn: conn, name: name} do
       assert html_response(conn, 200) =~ "Thanks! you've successfully shortlisted #{name}."
     end
   end
