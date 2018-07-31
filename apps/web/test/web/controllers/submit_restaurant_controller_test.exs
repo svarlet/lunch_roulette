@@ -54,7 +54,7 @@ defmodule Web.SubmitRestaurantControllerTest do
 
   describe "the submission of an invalid restaurant" do
     test "redirects to the home page", %{conn: conn} do
-      params = %{"name" => :irrelevant}
+      params = %{"name" => Faker.Company.name()}
       path = submit_restaurant_path(conn, :submit)
 
       di_container = %{
