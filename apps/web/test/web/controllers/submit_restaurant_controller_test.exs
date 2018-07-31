@@ -21,4 +21,13 @@ defmodule Web.SubmitRestaurantControllerTest do
       "Thanks! you've successfully shortlisted #{name}."
     end
   end
+
+  describe "the submission of a valid shortlisted restaurant" do
+    test "redirects to the home page", %{conn: conn} do
+      params = %{"name" => "The already registered restaurant"}
+      path = submit_restaurant_path(conn, :submit)
+      conn = post(conn, path, params)
+      assert redirected_to(conn) == page_path(conn, :home)
+    end
+  end
 end
