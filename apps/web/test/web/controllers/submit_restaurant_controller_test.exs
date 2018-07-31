@@ -47,4 +47,17 @@ defmodule Web.SubmitRestaurantControllerTest do
       assert %{"error" => "#{name} is already registered."} == get_flash(conn)
     end
   end
+
+  describe "the submission of an invalid restaurant" do
+    test "redirects to the home page", %{conn: conn} do
+      params = %{"name" => :irrelevant}
+      path = submit_restaurant_path(conn, :submit)
+      conn =
+        conn
+        |> recycle()
+        |> assign(:di_container, %{save: fn _ -> {:error, {:irrelevant_category, :irrelevant_reason}} end})
+        |> post(path, params)
+      assert redirected_to(conn) == page_path(conn, :home)
+    end
+  end
 end
