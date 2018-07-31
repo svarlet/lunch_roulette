@@ -2,9 +2,10 @@ defmodule Web.SubmitRestaurantController do
   use Web, :controller
 
   alias Domain.Restaurant
+  alias Domain.SubmitRestaurant.Policy
 
   def submit(conn, %{"name" => restaurant_name} = params) do
-    result = Domain.SubmitRestaurant.Policy.submit(params, conn.assigns.di_container.save)
+    result = Policy.submit(params, conn.assigns.di_container.save)
     case result do
       {:error, :already_registered} ->
         conn
