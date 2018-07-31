@@ -14,9 +14,9 @@ defmodule Web.SubmitRestaurantController do
         conn
         |> put_flash(:success, "Thanks! you've successfully shortlisted #{name}.")
         |> redirect(to: page_path(conn, :home))
-      {:error, {_category, _reason}} ->
+      {:error, {category, reason}} ->
         conn
-        |> put_flash(:error, "Error: irrelevant_category of #{restaurant_name} failed because of irrelevant_reason.")
+        |> put_flash(:error, "Error: #{category} of #{restaurant_name} failed because of #{reason}.")
         |> redirect(to: page_path(conn, :home))
     end
   end
