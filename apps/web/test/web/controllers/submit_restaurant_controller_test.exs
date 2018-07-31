@@ -5,7 +5,12 @@ defmodule Web.SubmitRestaurantControllerTest do
     setup %{conn: conn} do
       params = %{"name" => "The #{Faker.Color.En.fancy_name()} restaurant"}
       path = submit_restaurant_path(conn, :submit)
-      %{conn: post(conn, path, params), name: params["name"]}
+      conn =
+        conn
+        |> recycle()
+        |> assign(:di_container, %{save: fn restaurant -> {:ok, restaurant} end})
+        |> post(path, params)
+      %{conn: conn, name: params["name"]}
     end
 
     test "redirects to the home page", %{conn: conn} do
@@ -26,8 +31,23 @@ defmodule Web.SubmitRestaurantControllerTest do
     test "redirects to the home page", %{conn: conn} do
       params = %{"name" => "The already registered restaurant"}
       path = submit_restaurant_path(conn, :submit)
-      conn = post(conn, path, params)
+      conn =
+        conn
+        |> recycle()
+        |> assign(:di_container, %{save: fn _ -> {:error, :already_registered} end})
+        |> post(path, params)
       assert redirected_to(conn) == page_path(conn, :home)
+    end
+
+    test "sets a flash message", %{conn: conn} do
+      params = %{"name" => "The already registered restaurant"}
+      path = submit_restaurant_path(conn, :submit)
+      conn =
+        conn
+        |> recycle()
+        |> assign(:di_container, %{save: fn _ -> {:error, :already_registered} end})
+        |> post(path, params)
+      assert %{"error" => "The already registered restaurant is already registered."} == get_flash(conn)
     end
   end
 end
