@@ -69,5 +69,22 @@ defmodule Web.SubmitRestaurantControllerTest do
 
       assert redirected_to(conn) == page_path(conn, :home)
     end
+
+    test "report error with a flash message", %{conn: conn} do
+      params = %{"name" => :irrelevant}
+      path = submit_restaurant_path(conn, :submit)
+
+      di_container = %{
+        save: fn _ -> {:error, {:irrelevant_category, :irrelevant_reason}} end
+      }
+
+      conn =
+        conn
+        |> recycle()
+        |> assign(:di_container, di_container)
+        |> post(path, params)
+
+      assert %{"error" => "Error: irrelevant_category of #{params["name"]} failed because of irrelevant_reason."} == get_flash(conn)
+    end
   end
 end

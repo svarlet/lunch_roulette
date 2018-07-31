@@ -16,6 +16,7 @@ defmodule Web.SubmitRestaurantController do
         |> redirect(to: page_path(conn, :home))
       {:error, {_category, _reason}} ->
         conn
+        |> put_flash(:error, "Error: irrelevant_category of #{restaurant_name} failed because of irrelevant_reason.")
         |> redirect(to: page_path(conn, :home))
     end
   end
