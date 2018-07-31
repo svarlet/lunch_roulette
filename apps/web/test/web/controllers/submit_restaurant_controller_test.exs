@@ -3,7 +3,7 @@ defmodule Web.SubmitRestaurantControllerTest do
 
   describe "the submission of a valid not shortlisted restaurant" do
     setup %{conn: conn} do
-      params = %{"name" => "The #{Faker.Color.En.fancy_name()} restaurant"}
+      params = %{"name" => Faker.Company.name()}
       path = submit_restaurant_path(conn, :submit)
       conn =
         conn
