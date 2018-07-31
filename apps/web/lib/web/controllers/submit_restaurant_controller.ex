@@ -8,7 +8,7 @@ defmodule Web.SubmitRestaurantController do
     case result do
       {:error, :already_registered} ->
         conn
-        |> put_flash(:error,  "The already registered restaurant is already registered.")
+        |> put_flash(:error,  "#{restaurant_name} is already registered.")
         |> redirect(to: page_path(conn, :home))
       {:ok, %Restaurant{name: name}} ->
         conn
