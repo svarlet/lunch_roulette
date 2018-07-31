@@ -71,7 +71,7 @@ defmodule Web.SubmitRestaurantControllerTest do
     end
 
     test "report error with a flash message", %{conn: conn} do
-      params = %{"name" => :irrelevant}
+      params = %{"name" => Faker.Company.name()}
       path = submit_restaurant_path(conn, :submit)
 
       di_container = %{
