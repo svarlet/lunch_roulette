@@ -16,6 +16,8 @@ defmodule Web.Router do
   scope "/", Web do
     pipe_through :browser # Use the default browser stack
 
+    get "/", PageController, :home
+
     post "/restaurant/submit", SubmitRestaurantController, :submit
   end
 

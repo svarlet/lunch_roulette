@@ -8,8 +8,8 @@ defmodule Web.SubmitRestaurantControllerTest do
       %{conn: post(conn, path, params), name: params["name"]}
     end
 
-    test "displays a success feedback", %{conn: conn, name: name} do
-      assert html_response(conn, 200) =~ success_feedback_for(name)
+    test "redirects to the home page", %{conn: conn, name: name} do
+      assert redirected_to(conn) == page_path(conn, :home)
     end
 
     defp success_feedback_for(name) do

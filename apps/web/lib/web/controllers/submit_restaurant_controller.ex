@@ -3,8 +3,6 @@ defmodule Web.SubmitRestaurantController do
 
   def submit(conn, %{"name" => restaurant_name}) do
     conn
-    |> put_resp_content_type("text/html")
-    |> put_status(200)
-    |> render("index.html", restaurant_name: restaurant_name)
+    |> redirect(to: page_path(conn, :home))
   end
 end
