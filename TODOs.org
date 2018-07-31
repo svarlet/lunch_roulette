@@ -1,38 +1,23 @@
-#+TODO: TODO ASSESS DOING | DONE WONT_FIX
-
 * Submit restaurant
-** Policy [5/5]
-*** DONE nil submission
-    CLOSED: [2018-07-28 Sat 22:11]
-*** DONE restaurant name is nil
-    CLOSED: [2018-07-28 Sat 22:11]
-*** DONE restaurnat name is empty
-    CLOSED: [2018-07-28 Sat 22:11]
-*** DONE restaurant already shortlisted
-    CLOSED: [2018-07-29 Sun 14:05]
-*** DONE restaurant off shortlist
-    CLOSED: [2018-07-29 Sun 14:05]
-***
-**
-***
-**
-** Validator [0/4]
-*** TODO nil restaurant
-*** TODO with empty name -> {:error, :empty_restaurant_name}
-*** TODO with nil name -> {:error, :nil_restaurant_name}
-*** TODO anything else -> {:ok, restaurant}
-
-** Shortlist [0/2]
-*** TODO shortlisted -> {:error, :already_shortlisted}
-*** TODO not listed -> {:ok, shortlist}
-
-** Feedback [0/4]
-*** TODO report_success -> :ok
-*** TODO report_already_shortlisted -> :ok
-*** TODO report_invalid_submission -> :ok
-*** TODO Make a case template as many impl are likely to exist
-
-
-** Save
-*** TODO should return {:ok, restaurant} on success
-*** TODO should return {:error, :already_exists} when this restaurant has already been shortlisted
+** Config
+*** TODO Make logger less present in the test outputs
+** Controller [0/1]
+*** valid not shortlisted restaurant [3/3]
+**** DONE show success with flash
+     CLOSED: [2018-07-31 Tue 09:16]
+**** DONE Delete obsolete view/template
+     CLOSED: [2018-07-31 Tue 09:19]
+**** DONE redirects to home page
+     CLOSED: [2018-07-31 Tue 09:38]
+*** valid shortlisted restaurant [2/2]
+**** DONE redirects to home page
+     CLOSED: [2018-07-31 Tue 21:56]
+**** DONE show error with flash
+     CLOSED: [2018-07-31 Tue 22:48]
+*** invalid restaurant [2/2]
+**** DONE redirects to home page
+     CLOSED: [2018-07-31 Tue 23:06]
+**** DONE show error with flash
+     CLOSED: [2018-07-31 Tue 23:22]
+*** TODO create di container in the controller
+    - may need to introduce acceptance/integration test to check this
