@@ -22,6 +22,15 @@ jobs:
       - run: mix local.hex --force
       - run: mix local.rebar --force
       - run: mix deps.get
+      - restore_cache:
+          name: restore test dependencies from cache
+          key: v1-lunch-roulette-cache-{{ checksum "mix.lock" }}
       - run: mix test
+      - save_cache:
+          name: cache test dependencies
+          key: v1-lunch-roulette-cache-{{ checksum "mix.lock" }}
+          paths:
+            - deps
+            - _build
       - run:
           echo "Job done!"
