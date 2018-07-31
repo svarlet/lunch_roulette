@@ -5,7 +5,7 @@ defmodule Domain.SubmitRestaurant.Canonicalization do
     {:error, {:canonicalization, :not_canonicalizable}}
   end
 
-  def canonicalize(%{name: name}) do
+  def canonicalize(%{"name" => name}) do
     {:ok, %Restaurant{name: name}}
   end
 

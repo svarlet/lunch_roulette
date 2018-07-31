@@ -15,7 +15,7 @@ defmodule Domain.SubmitRestaurant.CanonicalizationTest do
   end
 
   test "accepts a datastructure with a name property" do
-    ds = %{name: "a name"}
+    ds = %{"name" => "a name"}
     assert {:ok, %Restaurant{name: "a name"}} == canonicalize(ds)
   end
 end
