@@ -45,7 +45,8 @@ defmodule Web.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:domain, in_umbrella: true},
-      {:faker, "~> 0.10"}
+      {:faker, "~> 0.10", [runtime: false, only: :test]},
+      {:wallaby, "~> 0.19.2", [runtime: false, only: :test]}
     ]
   end
 
