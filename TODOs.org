@@ -1,6 +1,7 @@
 * Submit restaurant
 ** Config
-*** TODO Make logger less present in the test outputs
+*** DONE Make logger less present in the test outputs
+    CLOSED: [2018-08-02 Thu 20:19]
 ** Controller [0/1]
 *** valid not shortlisted restaurant [3/3]
 **** DONE show success with flash
